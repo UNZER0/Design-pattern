@@ -1,0 +1,95 @@
+//饿汉式（太饿了，直接吃！一上来就创建了）
+/*public class Singleton {
+    private static Singleton uniqueInstance = new Singleton();
+
+    private Singleton() {
+    }
+
+    public static Singleton getUniqueInstance() {
+        return uniqueInstance;
+    }
+}*/
+
+//懒汉式-线程不安全（懒的创建，用的时候才创建）
+/*public class Singleton {
+    private static Singleton uniqueInstance;
+
+    private Singleton() {
+    }
+
+    public static Singleton getUniqueInstance() {
+        //延迟到方法里边创建，不为空才创建
+        if (uniqueInstance == null) {
+            uniqueInstance = new Singleton();
+        }
+        return uniqueInstance;
+    }
+}*/
+
+//懒汉式-线程安全（懒的创建，用的时候才创建）
+/*public class Singleton {
+    private static Singleton uniqueInstance;
+
+    private Singleton() {
+    }
+
+    //不安全就加个锁，强制它安全
+    public static synchronized Singleton getUniqueInstance() {
+        //延迟到方法里边创建，不为空才创建
+        if (uniqueInstance == null) {
+            uniqueInstance = new Singleton();
+        }
+        return uniqueInstance;
+    }
+}*/
+
+//双重校验锁-线程安全（双if+volatile）
+/*public class Singleton {
+    //加上volatile,解决了下边new的时候指令重排序导致的问题
+    private static volatile Singleton uniqueInstance;
+
+    private Singleton() {
+    }
+
+    public static Singleton getUniqueInstance() {
+        //延迟到方法里边创建，不为空才创建
+        if (uniqueInstance == null) {
+            //在if里边加锁
+            synchronized (Singleton.class) {
+                //但是这里不能直接实例化，得再来个if校验
+                if (uniqueInstance != null) {
+                    uniqueInstance = new Singleton();
+                }
+            }
+        }
+        return uniqueInstance;
+    }
+}*/
+
+//静态内部类
+/*public class Singleton {
+
+    //把实例变量和new放到了内部类里边
+    private static class SingletonHolder {
+        //final修饰保证只会初始化一次！而使用static final修饰是常量，全大写
+        private static final Singleton INSTANCE = new Singleton();
+    }
+
+    private Singleton() {
+    }
+
+    //直接返回内部类里边的实例变量
+    public static Singleton getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
+}*/
+
+//枚举
+/*public enum Singleton{
+    Instance;
+    public void doSomething(){
+        System.out.println("doSomething!!!");
+    }
+}*/
+
+
