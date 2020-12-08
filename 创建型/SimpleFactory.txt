@@ -1,0 +1,51 @@
+package DesignPattern;
+
+//简单工厂类
+public class SimpleFactory {
+    public Product createProduct(int wantProduct) {
+        if (wantProduct == 1) {
+            return new Product1();
+        } else {
+            return new Product2();
+        }
+    }
+}
+
+//一个抽象的产品类
+interface Product {
+
+}
+
+//产品1实现了抽象产品类
+class Product1 implements Product {
+
+}
+
+//产品2实现了抽象产品类
+class Product2 implements Product {
+
+}
+
+//传统方式，客户类自己创建想要的对象
+/*class Client {
+    public static void main(String[] args) {
+        int wantProduct = 1;
+        Product product;
+        if (wantProduct == 1) {
+            product = new Product1();
+        } else if (wantProduct == 2) {
+            product = new Product2();
+        } else {
+        }
+    }
+}*/
+
+//简单工厂，客户类通过工厂类获取想要的对象
+/*
+class Client {
+    public static void main(String[] args) {
+        int wantProduct = 1;
+        SimpleFactory factory = new SimpleFactory();
+        Product product = factory.createProduct(wantProduct);
+    }
+}*/

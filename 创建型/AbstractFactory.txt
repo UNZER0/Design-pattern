@@ -1,0 +1,78 @@
+package DesignPattern;
+
+//这个抽象工厂只定义多个抽象方法，用来生产不用的产品
+public abstract class AbstractFactory {
+    public abstract Fruits createFruits();
+    public abstract Clothes createClothes();
+}
+
+//这个工厂生产水果里边的苹果和衣服里边的毛衣
+class Product1Factory extends AbstractFactory {
+    @Override//生产苹果
+    public Fruits createFruits() {
+        return new Apple();
+    }
+
+    @Override//生产毛衣
+    public Clothes createClothes() {
+        return new Sweater();
+    }
+}
+
+//这个工厂生产水果里边的橘子和衣服里边的短袖
+class Product2Factory extends AbstractFactory {
+    @Override//生产橘子
+    public Fruits createFruits() {
+        return new Orange();
+    }
+
+    @Override//生产短袖
+    public Clothes createClothes() {
+        return new ShortSleeve();
+    }
+}
+
+
+//一个抽象的产品类（水果）
+abstract class Fruits {
+
+}
+
+//产品1（苹果）实现了抽象产品类（水果）
+class Apple extends Fruits {
+
+}
+
+//产品2（橘子）实现了抽象产品类（水果）
+class Orange extends Fruits {
+
+}
+
+//一个抽象的产品类（衣服）
+abstract class Clothes {
+
+}
+
+//产品1（毛衣）实现了抽象产品类（衣服）
+class Sweater extends Clothes {
+
+}
+
+//产品2（短袖）实现了抽象产品类（衣服）
+class ShortSleeve extends Clothes {
+
+}
+
+//工厂方法，客户类通过具体工厂类获取想要的对象
+class Client {
+    public static void main(String[] args) {
+        //来个工厂
+        AbstractFactory factory;
+        //想要吃苹果、穿毛衣
+        factory = new Product1Factory();
+        //得到了苹果
+        Fruits fruits = factory.createFruits();
+        //得到了毛衣
+        Clothes clothes = factory.createClothes();
+    }
+}
